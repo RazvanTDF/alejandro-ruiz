@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agenda · Alejandro Ruiz</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="assets/monograma.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<header class="hdr is-stuck">
+  <div class="wrap hdr__in">
+    <a class="brand" href="index.html">
+      <img src="assets/monograma.svg" alt="">
+      <span><b>Agenda</b><span>Acceso profesional</span></span>
+    </a>
+    <nav class="nav">
+      <a href="index.html">Ver la web</a>
+      <button class="btn btn--ghost" id="btn-salir" hidden>Cerrar sesión</button>
+    </nav>
+  </div>
+</header>
+
+<main class="agenda">
+  <div class="wrap">
+
+    <!-- Sin base de datos configurada -->
+    <div class="panel login" id="vista-sin-bd" hidden>
+      <h2 style="margin-bottom:.6rem">Agenda no conectada</h2>
+      <p class="muted">
+        Todavía no se ha configurado la base de datos. Sigue los pasos del archivo
+        <code>README.md</code> y rellena <code>js/config.js</code> con la URL y la clave
+        pública del proyecto de Supabase.
+      </p>
+    </div>
+
+    <!-- Login -->
+    <div class="panel login" id="vista-login" hidden>
+      <p class="eyebrow" style="text-align:center">Alejandro Ruiz</p>
+      <h2 style="text-align:center;margin-bottom:1.6rem">Entrar en la agenda</h2>
+      <form id="form-login">
+        <div class="field">
+          <label for="l-email">Email</label>
+          <input id="l-email" type="email" autocomplete="username" required>
+        </div>
+        <div class="field">
+          <label for="l-pass">Contraseña</label>
+          <input id="l-pass" type="password" autocomplete="current-password" required>
+        </div>
+        <button class="btn" style="width:100%" type="submit">Entrar</button>
+        <div class="msg" id="login-msg" role="status"></div>
+      </form>
+    </div>
+
+    <!-- Panel -->
+    <div id="vista-panel" hidden>
+      <div class="toolbar">
+        <div>
+          <p class="eyebrow" style="margin:0">Citas</p>
+          <h2 style="font-size:2rem">Tu agenda</h2>
+        </div>
+        <div class="chips" id="filtros">
+          <button class="chip is-on" data-f="proximas">Próximas</button>
+          <button class="chip" data-f="hoy">Hoy</button>
+          <button class="chip" data-f="semana">7 días</button>
+          <button class="chip" data-f="todas">Todas</button>
+          <button class="chip" id="chip-nueva">+ Cita manual</button>
+        </div>
+      </div>
+
+      <!-- Alta manual (para citas por teléfono) -->
+      <div class="panel" id="box-nueva" hidden style="margin-bottom:1.5rem">
+        <h3 style="margin-bottom:1.2rem">Nueva cita manual</h3>
+        <form id="form-manual">
+          <div class="form__row">
+            <div class="field"><label for="m-nombre">Nombre *</label><input id="m-nombre" required></div>
+            <div class="field"><label for="m-tel">Teléfono *</label><input id="m-tel" required></div>
+          </div>
+          <div class="form__row">
+            <div class="field"><label for="m-servicio">Servicio *</label><select id="m-servicio" required></select></div>
+            <div class="field"><label for="m-email">Email</label><input id="m-email" type="email"></div>
+          </div>
+          <div class="form__row">
+            <div class="field"><label for="m-fecha">Día *</label><input id="m-fecha" type="date" required></div>
+            <div class="field"><label for="m-hora">Hora *</label><input id="m-hora" type="time" step="900" required></div>
+          </div>
+          <div class="field"><label for="m-notas">Notas</label><textarea id="m-notas"></textarea></div>
+          <button class="btn" type="submit">Guardar cita</button>
+          <div class="msg" id="manual-msg" role="status"></div>
+        </form>
+      </div>
+
+      <div class="panel">
+        <div class="tbl__scroll">
+          <table class="tbl">
+            <thead>
+              <tr>
+                <th>Fecha</th><th>Hora</th><th>Paciente</th><th>Servicio</th>
+                <th>Notas</th><th>Estado</th><th></th>
+              </tr>
+            </thead>
+            <tbody id="tbody"><tr><td colspan="7" class="muted">Cargando…</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+      <p class="muted" style="font-size:.8rem;margin-top:1.2rem">
+        Datos de pacientes: trátalos con confidencialidad. Elimina las citas antiguas que
+        ya no necesites conservar.
+      </p>
+    </div>
+
+  </div>
+</main>
+
+<script src="js/config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script src="js/db.js"></script>
+<script src="js/agenda.js"></script>
+</body>
+</html>
