@@ -84,17 +84,17 @@
       }
       tbody.innerHTML = citas.map(c => `
         <tr data-id="${c.id}">
-          <td>${fechaCorta(c.slot_date)}</td>
-          <td><b>${String(c.slot_time).slice(0, 5)}</b></td>
-          <td>
+          <td data-l="Fecha">${fechaCorta(c.slot_date)}</td>
+          <td data-l="Hora"><b>${String(c.slot_time).slice(0, 5)}</b></td>
+          <td data-l="Paciente">
             ${escapar(c.nombre)}<br>
             <a class="muted" href="tel:${escapar(c.telefono)}" style="font-size:.82rem">${escapar(c.telefono)}</a>
             ${c.email ? `<br><span class="muted" style="font-size:.78rem">${escapar(c.email)}</span>` : ''}
           </td>
-          <td>${escapar(c.servicio)}<br><span class="muted" style="font-size:.75rem">${c.origen === 'consulta' ? 'alta manual' : 'web'}</span></td>
-          <td style="max-width:220px" class="muted">${c.notas ? escapar(c.notas) : '—'}</td>
-          <td><span class="badge ${c.estado}">${c.estado}</span></td>
-          <td style="white-space:nowrap">
+          <td data-l="Servicio">${escapar(c.servicio)}<br><span class="muted" style="font-size:.75rem">${c.origen === 'consulta' ? 'alta manual' : 'web'}</span></td>
+          <td data-l="Notas" style="max-width:220px" class="muted">${c.notas ? escapar(c.notas) : '—'}</td>
+          <td data-l="Estado"><span class="badge ${c.estado}">${c.estado}</span></td>
+          <td data-l="Acciones" style="white-space:nowrap">
             <button class="chip mini" data-a="confirmada">Confirmar</button>
             <button class="chip mini" data-a="cancelada">Anular</button>
             <button class="chip mini" data-a="borrar">Borrar</button>

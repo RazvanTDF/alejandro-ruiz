@@ -28,14 +28,21 @@
   const hdr = $('#hdr'), nav = $('#nav'), burger = $('#burger');
   addEventListener('scroll', () => hdr.classList.toggle('is-stuck', scrollY > 12), { passive: true });
   if (burger) {
-    burger.addEventListener('click', () => {
-      const open = nav.classList.toggle('is-open');
-      burger.classList.toggle('is-open', open);
-      burger.setAttribute('aria-expanded', open);
+    const abrirMenu = estado => {
+      nav.classList.toggle('is-open', estado);
+      burger.classList.toggle('is-open', estado);
+      burger.setAttribute('aria-expanded', estado);
+      document.body.classList.toggle('no-scroll', estado);
+    };
+    burger.addEventListener('click', () => abrirMenu(!nav.classList.contains('is-open')));
+    $$('#nav a').forEach(a => a.addEventListener('click', () => abrirMenu(false)));
+    addEventListener('keydown', e => { if (e.key === 'Escape') abrirMenu(false); });
+    document.addEventListener('click', e => {
+      if (nav.classList.contains('is-open') && !nav.contains(e.target) && !burger.contains(e.target))
+        abrirMenu(false);
     });
-    $$('#nav a').forEach(a => a.addEventListener('click', () => {
-      nav.classList.remove('is-open'); burger.classList.remove('is-open');
-    }));
+    // Al girar el móvil o volver a escritorio, cierra el menú
+    addEventListener('resize', () => { if (innerWidth > 760) abrirMenu(false); });
   }
 
   /* ---------- 3. Marquee de motivos ---------- */
@@ -116,6 +123,8 @@
   function aviso(texto, tipo) {
     msg.className = 'msg is-' + tipo;
     msg.innerHTML = texto;
+    // En móvil el mensaje puede quedar fuera de pantalla
+    msg.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
   function limpiarAviso() { msg.className = 'msg'; msg.textContent = ''; }
 
@@ -164,6 +173,9 @@
       horaElegida = b.dataset.h;
       actualizarWa();
     }));
+
+    // En móvil, acerca las horas recién cargadas
+    if (innerWidth <= 760) boxSlots.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
   inpFecha.addEventListener('change', pintarSlots);
 

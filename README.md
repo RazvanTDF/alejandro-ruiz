@@ -12,7 +12,7 @@ js/main.js        logica paginii publice + formularul de programare
 js/agenda.js      logica agendei private
 js/db.js          conexiunea la baza de date (opțională)
 css/styles.css    tot designul
-assets/           logo, monogramă, banner (copiate din SVG-urile originale)
+assets/           variantele de logo (vezi secțiunea 6)
 supabase/schema.sql  scriptul de bază de date
 ```
 
@@ -106,7 +106,30 @@ fără nume sau telefon.
 
 ---
 
-## 5. Legal (Spania)
+## 5. Logo — de ce sunt patru fișiere
+
+`Alex_Salon.svg` (sursa) **nu are fundal transparent**: are un dreptunghi alb pe toată pânza,
+iar litera A e desenată cu **forme albe de mascare** peste R. Dacă ștergi fundalul, rămân
+paralelograme albe vizibile peste literă — deci varianta „transparentă" nu funcționează.
+
+Soluția: variante recolorate pentru fiecare fundal, generate din sursă:
+
+| Fișier | Fundal/mască | Desen | Unde se folosește |
+|---|---|---|---|
+| `logo.svg` | alb | tuș | rama albă din hero (AR + „ALEJANDRO RUIZ") |
+| `monograma-blanco.svg` | alb | tuș | cardul alb din „Sobre mí" |
+| `monograma-crema.svg` | `#F7F4EE` | tuș | header (fundal crem) |
+| `monograma-oscuro.svg` | `#14170F` | crem | footer (fundal închis) |
+
+Monogramele sunt decupate doar pe „AR" (fără cuvântul de sub el), ca să rămână lizibile la
+32–56px pe telefon.
+
+**Dacă schimbi logo-ul:** înlocuiește `Alex_Salon.svg` și cere-mi să regenerez variantele —
+altfel trebuie refăcute manual (recolorare + decupare `viewBox`).
+
+---
+
+## 6. Legal (Spania)
 
 - `legal.html` e un **șablon** cu aviso legal, politică de confidențialitate și cookies,
   aliniat la RGPD, LOPDGDD și LSSI. Trebuie completate NIF-ul și adresa reală.
