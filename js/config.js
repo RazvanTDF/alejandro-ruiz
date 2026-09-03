@@ -9,7 +9,7 @@ window.SITE = {
   /* --- Identidad ------------------------------------------- */
   nombre: "Alejandro Ruiz",
   claim: "Acupuntura y Osteopatía",
-  ciudad: "Madrid",
+  ciudad: "Irún",
 
   /* --- Contacto (DATOS DE EJEMPLO: sustituir) --------------- */
   telefono: "+34 664 49 38 38",         // se muestra tal cual
@@ -17,8 +17,8 @@ window.SITE = {
   whatsapp: "34664493838",              // solo dígitos con prefijo país
   email: "hola@alejandroruiz.example",
   direccion: "Calle Ejemplo 1, 2º B",
-  codigoPostal: "28001 Madrid",
-  mapsQuery: "Calle Ejemplo 1, Madrid",
+  codigoPostal: "20301 Irún (Gipuzkoa)",
+  mapsQuery: "Calle Ejemplo 1, Irún, Gipuzkoa",
   instagram: "",                        // p.ej. "alejandroruiz.salud" ("" = oculto)
 
   /* --- Horario --------------------------------------------- */
